@@ -1,4 +1,4 @@
-# Project Title (Thesis: Neural ODEs and Conditional Normalizing Flows for Generative Modeling)
+# Thesis: Neural ODEs and Conditional Normalizing Flows for Generative Modeling
 
 ## Overview
 
