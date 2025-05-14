@@ -1,0 +1,111 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# PEP 582; __pypackages__
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath files
+*.sage.py
+
+# Environments
+.env
+.flaskenv
+
+# macOS
+.DS_Store
+
+# Project-specific (from neural_ode_flows_project/.gitignore)
+# experiments/* # Consider if you want to commit experiment configs but not results/weights.
+# data/* # Remove if you want to track small datasets or metadata, re-add if data dir should be fully ignored. 
+data/mnist_test_run/MNIST/raw/t10k-images-idx3-ubyte
+data/mnist_test_run/MNIST/raw/t10k-images-idx3-ubyte.gz
+data/mnist_test_run/MNIST/raw/t10k-labels-idx1-ubyte
+data/mnist_test_run/MNIST/raw/t10k-labels-idx1-ubyte.gz
+data/mnist_test_run/MNIST/raw/train-images-idx3-ubyte
+data/mnist_test_run/MNIST/raw/train-images-idx3-ubyte.gz
+data/mnist_test_run/MNIST/raw/train-labels-idx1-ubyte
+data/mnist_test_run/MNIST/raw/train-labels-idx1-ubyte.gz
+test_run_mnist_cnfg_gan/results/args.yaml
+test_run_mnist_cnfg_gan/results/logs
+test_run_mnist_cnfg_gan/results/test.csv
+test_run_mnist_cnfg_gan/results/training.csv
