@@ -26,35 +26,34 @@ from torchvision.datasets import ImageFolder
 
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, utils
-from u_net.PyTorchDatasets import  Celeba
+from core_lib.networks.u_net.PyTorchDatasets import  Celeba
 
-import u_net.inception_utils as inception_utils
+from core_lib.networks.u_net import inception_utils
 
-import lib.layers as layers
-import lib.utils as utils
-import u_net.utils as unet_utils
-import lib.odenvp as odenvp
-from lib.datasets import CelebAHQ, Imagenet64
+from core_lib import layers
+from core_lib import utils
+from core_lib.networks.u_net import utils as unet_utils
+from core_lib import odenvp
+from core_lib.datasets import CelebAHQ, Imagenet64
 
-from u_net.fid_score import calculate_fid_given_paths_or_tensor
+from core_lib.networks.u_net.fid_score import calculate_fid_given_paths_or_tensor
 #import pickle
 from matplotlib import pyplot as plt
-from u_net.mixup import CutMix
+from core_lib.networks.u_net.mixup import CutMix # Assuming mixup is in core_lib.networks.u_net
 import gc
 from types import ModuleType, FunctionType
 from gc import get_referents
 
 
-from train_misc import standard_normal_logprob
-from train_misc import set_cnf_options, count_nfe, count_parameters, count_total_time
-from train_misc import create_regularization_fns, get_regularization, append_regularization_to_log
-from train_misc import append_regularization_keys_header, append_regularization_csv_dict
+from core_lib.utils import standard_normal_logprob
+from core_lib.utils import set_cnf_options, count_nfe, count_parameters, count_total_time
+from core_lib.utils import create_regularization_fns, get_regularization, append_regularization_to_log
+from core_lib.utils import append_regularization_keys_header, append_regularization_csv_dict
 
-import dist_utils
-from dist_utils import env_world_size, env_rank
-from torch.utils.data.distributed import DistributedSampler
+from core_lib import distributed_utils as dist_utils
+# from core_lib.distributed_utils import env_world_size, env_rank
 
-import u_net.unet_d as unet_d
+from core_lib.networks.u_net import unet_d
 
 #-----------------------------
 
@@ -156,7 +155,7 @@ def get_dataset(args):
         return tensor, targets
 
     train_sampler = (DistributedSampler(train_set,
-        num_replicas=env_world_size(), rank=env_rank()) if args.distributed
+        num_replicas=dist_utils.env_world_size(), rank=dist_utils.env_rank()) if args.distributed
         else None)
 
     train_loader = torch.utils.data.DataLoader(
@@ -165,7 +164,7 @@ def get_dataset(args):
     )
 
     test_sampler = (DistributedSampler(test_set,
-        num_replicas=env_world_size(), rank=env_rank(), shuffle=False) if args.distributed
+        num_replicas=dist_utils.env_world_size(), rank=dist_utils.env_rank(), shuffle=False) if args.distributed
         else None)
 
     test_loader = torch.utils.data.DataLoader(

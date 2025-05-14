@@ -25,8 +25,8 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 import logging
 
-import u_net.datasets as dset
-import lib.utils as utils
+from . import datasets as dset
+from core_lib import utils as utils
 
 
 def prepare_parser():

@@ -12,12 +12,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import os
-import utils
-import inception_utils
+from . import utils
+from . import inception_utils
 from tqdm import tqdm, trange
 from argparse import ArgumentParser
 from torchvision import datasets, transforms, utils
-from u_net.PyTorchDatasets import FFHQ, LSUN, CelebaHQ, Celeba
+from .PyTorchDatasets import FFHQ, LSUN, CelebaHQ, Celeba
 from torch.utils.data import DataLoader
 
 def prepare_parser():

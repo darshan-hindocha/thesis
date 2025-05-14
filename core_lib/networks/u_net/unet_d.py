@@ -13,18 +13,18 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.nn import Parameter as P
 
-import u_net.layers as layers
-import lib.odenvp as odenvp
+from . import layers as layers
+from core_lib import odenvp as odenvp
 
 import copy
 from matplotlib import pyplot as plt
 
 
-import lib.layers as ODElayers
-from lib.layers.odefunc import ODEnet
-from lib.layers.squeeze import squeeze, unsqueeze
+from core_lib import layers as ODElayers
+from core_lib.layers.odefunc import ODEnet
+from core_lib.layers.squeeze import squeeze, unsqueeze
 import numpy as np
-from train_misc import create_regularization_fns
+from core_lib.utils import create_regularization_fns
 
 from torch.optim.optimizer import Optimizer
 class Adam16(Optimizer):
@@ -481,7 +481,7 @@ class Generator(nn.Module):
         zs = [_z.view(_z.size()[0], *zsize) for _z, zsize in zip(zs, self.dims)] # I believe this is squeezing the noise/latent to match the output of the 'final' layer?
         _logpz = logpz
         z_prev, _logpz, _ = self.transforms[-1](zs[-1], _logpz, reverse=True, density=density)
-        for idx in range(len(self.transforms) - 2, -1, -1): # if len(self.transforms) is 10 then idx will be 8,7,..,1,0
+        for idx in range(len(self.transforms) - 2, -1, -1): # if len(self.transforms) is 10 then idx will be 8,7,..,1,0
             z_prev = torch.cat((z_prev, zs[idx]), dim=1)
             z_prev, _logpz, reg_states = self.transforms[idx](z_prev, _logpz, reg_states, reverse=True,density=density)
         return z_prev, _logpz, reg_states

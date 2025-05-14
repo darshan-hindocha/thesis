@@ -21,21 +21,20 @@ import torchvision.datasets as dset
 import torchvision.transforms as tforms
 from torchvision.utils import save_image
 
-import lib.layers as layers
-import lib.utils as utils
-import lib.odenvp as odenvp
-from lib.datasets import CelebAHQ, Imagenet64
+from core_lib import layers
+from core_lib import utils
+from core_lib import odenvp
+from core_lib.datasets import CelebAHQ, Imagenet64
 
-from train_misc import standard_normal_logprob
-from train_misc import set_cnf_options, count_nfe, count_parameters, count_total_time
-from train_misc import create_regularization_fns, get_regularization, append_regularization_to_log
-from train_misc import append_regularization_keys_header, append_regularization_csv_dict
+from core_lib.utils import standard_normal_logprob
+from core_lib.utils import set_cnf_options, count_nfe, count_parameters, count_total_time
+from core_lib.utils import create_regularization_fns, get_regularization, append_regularization_to_log
+from core_lib.utils import append_regularization_keys_header, append_regularization_csv_dict
 
-import dist_utils
-from dist_utils import env_world_size, env_rank
-from torch.utils.data.distributed import DistributedSampler
+from core_lib import distributed_utils as dist_utils
+# from core_lib.distributed_utils import env_world_size, env_rank
 
-from lib.networks import Generator, Discriminator
+from core_lib.networks import Generator, Discriminator
 #from lib.utils2 import get_data_loader, generate_images, save_gif
 
 

@@ -17,18 +17,17 @@ import torchvision.datasets as dset
 import torchvision.transforms as tforms
 from torchvision.utils import save_image
 
-import lib.layers as layers
-import lib.utils as utils
-import lib.odenvp as odenvp
-from lib.datasets import CelebAHQ, Imagenet64
+from core_lib import layers
+from core_lib import utils
+from core_lib import odenvp
+from core_lib.datasets import CelebAHQ, Imagenet64
 
-from train_misc import standard_normal_logprob
-from train_misc import set_cnf_options, count_nfe, count_parameters, count_total_time
-from train_misc import create_regularization_fns, get_regularization, append_regularization_to_log
-from train_misc import append_regularization_keys_header, append_regularization_csv_dict
+from core_lib.utils import standard_normal_logprob
+from core_lib.utils import set_cnf_options, count_nfe, count_parameters, count_total_time
+from core_lib.utils import create_regularization_fns, get_regularization, append_regularization_to_log
+from core_lib.utils import append_regularization_keys_header, append_regularization_csv_dict
 
-import dist_utils
-from dist_utils import env_world_size, env_rank
+from core_lib import distributed_utils as dist_utils
 from torch.utils.data.distributed import DistributedSampler
 
 SOLVERS = ["dopri5", "bdf", "rk4", "midpoint", 'adams', 'explicit_adams', 'adaptive_heun', 'bosh3']
@@ -199,7 +198,7 @@ def get_dataset(args):
         return tensor, targets
 
     train_sampler = (DistributedSampler(train_set,
-        num_replicas=env_world_size(), rank=env_rank()) if args.distributed
+        num_replicas=dist_utils.env_world_size(), rank=dist_utils.env_rank()) if args.distributed
         else None)
 
     train_loader = torch.utils.data.DataLoader(
@@ -208,7 +207,7 @@ def get_dataset(args):
     )
 
     test_sampler = (DistributedSampler(test_set,
-        num_replicas=env_world_size(), rank=env_rank(), shuffle=False) if args.distributed
+        num_replicas=dist_utils.env_world_size(), rank=dist_utils.env_rank(), shuffle=False) if args.distributed
         else None)
 
     test_loader = torch.utils.data.DataLoader(
@@ -273,7 +272,7 @@ def main():
     if args.distributed:
         if write_log: logger.info('Distributed initializing process group')
         torch.cuda.set_device(args.local_rank)
-        distributed.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=dist_utils.env_world_size(), rank=env_rank())
+        distributed.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=dist_utils.env_world_size(), rank=dist_utils.env_rank())
         assert(dist_utils.env_world_size() == distributed.get_world_size())
         if write_log: logger.info("Distributed: success (%d/%d)"%(args.local_rank, distributed.get_world_size()))
 

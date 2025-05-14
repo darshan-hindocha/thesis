@@ -25,5 +25,4 @@ def sum_tensor(tensor):
   return rt
 
 def env_world_size(): return int(os.environ['WORLD_SIZE'])
-def env_rank(): return int(os.environ['RANK'])
-
+def env_rank(): return int(os.environ['RANK']) 
