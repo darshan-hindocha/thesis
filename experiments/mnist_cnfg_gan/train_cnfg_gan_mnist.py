@@ -296,7 +296,7 @@ if __name__ == "__main__": #def main():
         if write_log: logger.info("Distributed: success (%d/%d)"%(args.local_rank, distributed.get_world_size()))
 
     # get deivce
-    device = torch.device("cuda:%d"%torch.cuda.current_device() if torch.cuda.is_available() else "cpu")
+    device = torch.device("cpu")
     cvt = lambda x: x.type(torch.float32).to(device, non_blocking=True)
 
     # load dataset
@@ -315,7 +315,7 @@ if __name__ == "__main__": #def main():
 
     # build model
     regularization_fns, regularization_coeffs = create_regularization_fns(args)
-    model = create_model(args, data_shape, regularization_fns).cuda() ##** what does the .cuda() do?
+    model = create_model(args, data_shape, regularization_fns).to(device) ##** what does the .cuda() do?
     if args.distributed: model = dist_utils.DDP(model,
                                                 device_ids=[args.local_rank], 
                                                 output_device=args.local_rank)
@@ -453,7 +453,7 @@ if __name__ == "__main__": #def main():
 
     if args.distributed:
         if write_log: logger.info('Syncing machines before training')
-        dist_utils.sum_tensor(torch.tensor([1.0]).float().cuda())
+        dist_utils.sum_tensor(torch.tensor([1.0]).float().to(device))
 
     l_av = 2
     l= 1
@@ -573,9 +573,9 @@ if __name__ == "__main__": #def main():
                                             bpd.item(),
                                             nfe_opt,
                                             grad_norm,
-                                            *reg_states]).float().cuda()
+                                            *reg_states]).float().to(device)
 
-                    rv = tuple(torch.tensor(0.).cuda() for r in reg_states)  ##** Switch to .to(device) ?
+                    rv = tuple(torch.tensor(0.).to(device) for r in reg_states)  ##** Switch to .to(device) ?
 
                     total_gpus, batch_total, r_loss, r_bpd, r_nfe, r_grad_norm, *rv = metrics.cpu().numpy()
 
@@ -724,7 +724,7 @@ if __name__ == "__main__": #def main():
 
 
                     loss = lossmean.item()
-                    metrics = torch.tensor([1., loss, meandist, steps]).float().cuda()
+                    metrics = torch.tensor([1., loss, meandist, steps]).float().to(device)
 
                     total_gpus, r_bpd, r_mdist, r_steps = metrics.cpu().numpy()
                     eval_time = time.time()-start

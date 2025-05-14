@@ -97,3 +97,15 @@ celerybeat.pid
 # Project-specific (from neural_ode_flows_project/.gitignore)
 # experiments/* # Consider if you want to commit experiment configs but not results/weights.
 # data/* # Remove if you want to track small datasets or metadata, re-add if data dir should be fully ignored. 
+data/mnist_test_run/MNIST/raw/t10k-images-idx3-ubyte
+data/mnist_test_run/MNIST/raw/t10k-images-idx3-ubyte.gz
+data/mnist_test_run/MNIST/raw/t10k-labels-idx1-ubyte
+data/mnist_test_run/MNIST/raw/t10k-labels-idx1-ubyte.gz
+data/mnist_test_run/MNIST/raw/train-images-idx3-ubyte
+data/mnist_test_run/MNIST/raw/train-images-idx3-ubyte.gz
+data/mnist_test_run/MNIST/raw/train-labels-idx1-ubyte
+data/mnist_test_run/MNIST/raw/train-labels-idx1-ubyte.gz
+test_run_mnist_cnfg_gan/results/args.yaml
+test_run_mnist_cnfg_gan/results/logs
+test_run_mnist_cnfg_gan/results/test.csv
+test_run_mnist_cnfg_gan/results/training.csv
