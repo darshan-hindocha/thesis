@@ -2,9 +2,10 @@
 
 ## Goal
 
-[**User to complete: Describe the specific model (likely a generic CNF/NODE setup) and research goal of this experiment. This script seems to be a more general-purpose trainer from the original `ffjord` repository.**]
-
-This script (`train_generic.py`) appears to be a general-purpose training script for Continuous Normalizing Flows or Neural ODE models, likely adapted from the original FFJORD project. It can be configured for various datasets and model parameters.
+This script (`train_generic.py`) serves as a general-purpose trainer for Continuous Normalizing Flows (CNFs) or Neural Ordinary Differential Equation (NODE) models. It is adapted from the original FFJORD project and allows for flexible configuration across various datasets (e.g., CIFAR-10, CelebA-HQ, MNIST, SVHN) and model parameters. Its main research utility in the context of the thesis (Chapter 1, Section 1.3) is to train and evaluate standalone CNF models. This allows for:
+1.  Density estimation on complex datasets.
+2.  Generation of samples from the learned distributions.
+3.  Establishing baseline performance for CNFs, which can then be compared against hybrid models like CNF-GANs to assess the impact of adversarial training.
 
 ## How to Run
 
@@ -38,5 +39,6 @@ python train_generic.py \
 ## Notes
 
 [**User to complete: Add any specific configurations, dataset preprocessing notes if not covered in the main README, or other relevant information for this experiment.**]
-* This script is highly configurable via command-line arguments. Refer to the script's argument parser for all options.
-* It supports various ODE solvers and regularization techniques. 
+* This script is highly configurable via command-line arguments. Refer to the script's argument parser (`parser = argparse.ArgumentParser()`) for a comprehensive list of all options, including choices for ODE solvers, network dimensions (`dims`), number of blocks (`num_blocks`), regularization techniques, and more.
+* It supports various datasets like CIFAR-10, MNIST, CelebA-HQ, etc., selectable via the `--data` argument.
+* When comparing results, ensure consistent settings for shared parameters (e.g., CNF architecture details) if this script is used to generate a baseline for a CNF-GAN experiment. 
