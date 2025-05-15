@@ -95,45 +95,6 @@ Based on the findings and the framework established in this thesis, potential fu
 *   **Applications to other domains:** Apply CNF-GANs and related NODE-based generative models to other data modalities, such as time-series data, audio, or video.
 *   **Improved regularization techniques:** Develop novel regularization methods tailored for CNFs within an adversarial training loop to further improve sample quality and training stability.
 
-## Contributing
-
-Contributions to this project are welcome! If you have suggestions, bug reports, or would like to contribute code, please follow these general guidelines:
-
-1.  **Fork the repository.**
-2.  **Create a new branch** for your feature or bug fix (e.g., `feature/my-new-feature` or `fix/issue-number`).
-3.  **Make your changes** and ensure they adhere to the project's coding style (if any established).
-4.  **Test your changes thoroughly.**
-5.  **Submit a pull request** with a clear description of your changes and why they are needed.
-
-Please open an issue first to discuss any significant changes or new features.
-
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE.md` file (to be created) for details. You are free to use, modify, and distribute this code as permitted by the license.
-It is recommended to create a `LICENSE.md` file in the root of your project containing the full text of the MIT license. For example:
-
-```markdown
-MIT License
-
-Copyright (c) [Year] [Your Name/Organization]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-(Remember to replace `[Year]` and `[Your Name/Organization]`.) 
